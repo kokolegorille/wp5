@@ -1,7 +1,11 @@
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+const path = require("path")
+const Webpack = require('webpack')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
+
+// Dev server
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = (_env, options) => {
     const devMode = options.mode !== "production"
@@ -63,7 +67,22 @@ module.exports = (_env, options) => {
             ]
         },
         plugins: [
+            new HtmlWebpackPlugin({
+                filename: "index.html",
+                template: "./src/index.html",
+                inject: "body",
+            }),
             new MiniCssExtractPlugin({ filename: "./css/app.css" }),
-        ]
+            new Webpack.HotModuleReplacementPlugin(),
+        ],
+        devServer: {
+            contentBase: path.join(__dirname, "dist"),
+            historyApiFallback: true,
+            compress: true,
+            open: true,
+            hot: true,
+            overlay: true,
+            // port: 8080,
+        }
     }
 }
