@@ -16,6 +16,23 @@ module.exports = (_env, options) => {
         mode,
         devtool: devMode ? "eval-cheap-module-source-map" : undefined,
         optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    defaultVendors: {
+
+                        // test: /react|react-dom/,
+                        // name: "vendor",
+                        // chunks: "initial",
+                        // enforce: true,
+
+                        // test: /[\\/]node_modules[\\/]/,
+                        
+                        test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                        name: "vendor",
+                        chunks: "all",
+                    }
+                }
+            },
             minimizer: [
                 new TerserPlugin({}),
                 new CssMinimizerPlugin({})
@@ -25,7 +42,7 @@ module.exports = (_env, options) => {
             bundle: "./src/index.js"
         },
         output: {
-            filename: "./js/[name].js",
+            filename: "js/[name].js",
             path: path.resolve(__dirname, "./dist"),
             publicPath: "/"
         },
@@ -53,7 +70,7 @@ module.exports = (_env, options) => {
                     test: /\.(png|svg|jpe?g|gif)(\?.*$|$)/,
                     type: "asset/resource",
                     generator: {
-                        filename: "./images/[hash][ext][query]"
+                        filename: "./images/[contenthash][ext][query]"
                     }
                 },
                 // Load fonts
@@ -61,7 +78,7 @@ module.exports = (_env, options) => {
                     test: /\.(woff|woff2|eot|ttf|otf)$/,
                     type: "asset/resource",
                     generator: {
-                        filename: "./fonts/[hash][ext][query]"
+                        filename: "./fonts/[contenthash][ext][query]"
                     }
                 }
             ]
