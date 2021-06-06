@@ -19,29 +19,29 @@ const guestHeaders = (data, method = "POST") => ({
     body: JSON.stringify(data)
 });
 
-const processResponse = response => {
-    if (response.ok) {
-        response
-            .json()
-            .then(data => console.log(data))
-    } else {
-        response
-            .json()
-            .then(data => console.log(data))
-    }
-}
+// const processResponse = response => {
+//     if (response.ok) {
+//         response
+//             .json()
+//             .then(data => console.log(data))
+//     } else {
+//         response
+//             .json()
+//             .then(data => console.log(data))
+//     }
+// }
 
 const Api = {
     // POST
     signin: params =>
-        fetch(`${ROOT_URL}/authentication`, guestHeaders({ session: params }))
-            .then(response => processResponse(response))
-            .catch(error => console.log("Network error", error)),
+        fetch(`${ROOT_URL}/authentication`, guestHeaders({ session: params })),
+            // .then(response => processResponse(response))
+            // .catch(error => console.log("Network error", error)),
 
     signup: params =>
-        fetch(`${ROOT_URL}/registration`, guestHeaders({ user: params }))
-            .then(response => processResponse(response))
-            .catch(error => console.log("Network error", error)),
+        fetch(`${ROOT_URL}/registration`, guestHeaders({ user: params })),
+            // .then(response => processResponse(response))
+            // .catch(error => console.log("Network error", error)),
 
     // AUTHENTIFIED
     // PATCH

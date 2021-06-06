@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import useWindowSize from "../hooks/useWindowSize";
 import useLocalStorage from "../hooks/useLocalStorage";
-import useTheme from "../hooks/useTheme";
-import useFlash from "../hooks/useFlash";
+import { 
+    useFlash,
+    useTheme
+} from "../hooks/useApp";
 
 import Clock from "../components/Clock";
 import Modal from "../components/Modal";
 
-import Api from "../services/Api";
+// import Api from "../services/Api";
 
 const Demo = () => {
     const { width, height } = useWindowSize();
@@ -19,10 +22,10 @@ const Demo = () => {
     const [theme] = useTheme();
     const [_, setFlash] = useFlash();
 
-    useEffect(() => {
-        Api.signin({ name: "admin", password: "secret" });
-        Api.signup({ name: "koko", password: "secret", email: "kokolegorille@gmail.com" });
-    }, []);
+    // useEffect(() => {
+    //     Api.signin({ name: "admin", password: "secrete" });
+    //     Api.signup({ name: "koko", password: "secret", email: "kokolegorille@gmail.com" });
+    // }, []);
 
     return (
         <div>
@@ -38,7 +41,7 @@ const Demo = () => {
                 <option>Koko</option>
             </select>
 
-            <Clock size={150} theme={theme}/>
+            <Clock size={150} theme={theme} />
 
             <ul>
                 <li><a onClick={() => setFlash("Koko flash")}>Set Flash!</a></li>

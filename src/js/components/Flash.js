@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import useFlash from "../hooks/useFlash";
+import { useFlash } from "../hooks/useApp";
 
 const DELAY = 5;
 
@@ -9,6 +9,7 @@ const Flash = () => {
 
     useEffect(() => {
         if (flash) {
+            // Close flash message after some time
             let timer = setTimeout(() =>
                 setFlash(null), DELAY * 1000
             );

@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import { ThemeContext } from "../hooks/useApp";
+import { useTheme } from "../hooks/useApp";
 
 const ThemeSwitch = () => {
-    const { theme, setTheme } = useContext(ThemeContext);
+    const [theme, setTheme] = useTheme();
     const nextTheme = theme === "dark" ? "default" : "dark";
     return (
         <a onClick={() => setTheme(nextTheme)}>Switch to {nextTheme} mode</a>
