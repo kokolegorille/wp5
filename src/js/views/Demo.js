@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import useWindowSize from "../hooks/useWindowSize";
 import useLocalStorage from "../hooks/useLocalStorage";
+import useTheme from "../hooks/useTheme";
+import useFlash from "../hooks/useFlash";
 
 import Clock from "../components/Clock";
 import Modal from "../components/Modal";
@@ -14,9 +16,12 @@ const Demo = () => {
 
     const [showModal, setShowModal] = useState(null);
 
+    const [theme] = useTheme();
+    const [_, setFlash] = useFlash();
+
     useEffect(() => {
-        Api.signin({ name: "admin", password: "secret" }),
-            Api.signup({ name: "koko", password: "secret", email: "kokolegorille@gmail.com" })
+        Api.signin({ name: "admin", password: "secret" });
+        Api.signup({ name: "koko", password: "secret", email: "kokolegorille@gmail.com" });
     }, []);
 
     return (
@@ -33,9 +38,12 @@ const Demo = () => {
                 <option>Koko</option>
             </select>
 
-            <Clock size={150} />
+            <Clock size={150} theme={theme}/>
 
-            <a onClick={() => setShowModal(true)}>Show Modal!</a>
+            <ul>
+                <li><a onClick={() => setFlash("Koko flash")}>Set Flash!</a></li>
+                <li><a onClick={() => setShowModal(true)}>Show Modal!</a></li>
+            </ul>
 
             {
                 showModal &&

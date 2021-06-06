@@ -2,12 +2,15 @@ body {
     margin: 0;
     padding: 0;
 }
-   
+
 body {
     font-family: roboto;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     font-family: oswald;
 }
 blockquote {
@@ -15,7 +18,8 @@ blockquote {
 }
 
 #main {
-    padding-top: 1rem;
+    width: 100vw;
+    height: 100vh;
 }
 
 // Modal
@@ -27,12 +31,13 @@ blockquote {
     align-items: center;
     justify-content: center;
     background: rgba(0,0,0,0.6);
-    width:100%;
-    height:100%;
-    overflow:auto;
-  }
-  
-  .modal-wrap {
+    // background-color: var(--background-color);
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.modal-wrap {
     background-color: white;
     padding: 1rem;
     position: relative;
@@ -40,23 +45,23 @@ blockquote {
     height: 75vh;
     // width: 100%;
     .close {
-      top: -12px;
-      right: -12px;
-      background: #fff;
-      border-radius: 50%;
-      // 
-      color: #4d4d4d;
-      position: absolute;
-      font-size: 30px;
-      line-height: 27px;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-      text-align: center;
-  
-      &:hover {
-        color: #fff;
-        background: red;
-      }
+        top: -12px;
+        right: -12px;
+        background: #fff;
+        border-radius: 50%;
+          color: #4d4d4d;
+        // color: var(--color);
+        position: absolute;
+        font-size: 30px;
+        line-height: 27px;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        text-align: center;
+
+        &:hover {
+            color: #fff;
+            background: red;
+        }
     }
-  }
+}

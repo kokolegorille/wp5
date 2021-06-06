@@ -1,23 +1,24 @@
-import React, { useContext } from "react";
+import React from "react";
+
+import useTheme from "./hooks/useTheme";
 
 import Demo from "./views/Demo";
-import { ThemeContext } from "./hooks/useApp";
+
+import Flash from "./components/Flash";
+import ThemeSwitch from "./components/ThemeSwitch";
 
 const App = () => {
-    const { theme, setTheme } = useContext(ThemeContext);
+    const [theme] = useTheme();
 
     return (
-        <div id="main" data-theme={theme}>
-            {
-                theme === "dark" &&
-                <a onClick={() => setTheme("default")}>Switch to Default mode</a>
-            }
-            {
-                theme !== "dark" &&
-                <a onClick={() => setTheme("dark")}>Switch to Dark mode</a>
-            }
-            <Demo />
-        </div>
+        <>
+            <div id="main" data-theme={theme}>
+                <Flash />
+                <ThemeSwitch />
+                <Demo />
+            </div>
+            <div id="modal-root"></div>
+        </>
     )
 }
 

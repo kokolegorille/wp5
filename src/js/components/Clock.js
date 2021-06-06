@@ -5,11 +5,20 @@ import React from "react";
 
 import useClock from "../hooks/useClock";
 
-const Clock = ({size = 150}) => {
+const Clock = ({size = 150, theme = "light"}) => {
     const { hrsRotn, minsRotn, secsRotn } = useClock();
+    let fill, stroke;
+
+    if (theme === "dark") {
+        fill = "black";
+        stroke = "white";
+    } else {
+        fill = "white";
+        stroke = "black";
+    }
 
     const wrapStyle = {width: size, height: size};
-    const faceStyle = {strokeWidth: "1px", fill: "white", stroke: "black"};
+    const faceStyle = {strokeWidth: "1px", fill, stroke};
     const handsStyle = {strokeWidth: "1px", fill: "#333", stroke: "#555"};
     const secondsStyle = {strokeWidth: "1px", fill: "#333", stroke: "#f55"};
     
