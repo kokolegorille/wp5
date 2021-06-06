@@ -1,5 +1,5 @@
 const path = require("path")
-const Webpack = require('webpack')
+const Webpack = require("webpack")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 const TerserPlugin = require("terser-webpack-plugin")
@@ -19,17 +19,9 @@ module.exports = (_env, options) => {
             splitChunks: {
                 cacheGroups: {
                     defaultVendors: {
-
-                        // test: /react|react-dom/,
-                        // name: "vendor",
-                        // chunks: "initial",
-                        // enforce: true,
-
-                        // test: /[\\/]node_modules[\\/]/,
-                        
                         test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
                         name: "vendor",
-                        chunks: "all",
+                        chunks: "initial",
                     }
                 }
             },
