@@ -9,6 +9,7 @@ import {
 
 import Clock from "../components/Clock";
 import Modal from "../components/Modal";
+import Signout from "../components/Signout";
 
 const Member = () => {
     const { width, height } = useWindowSize();
@@ -23,6 +24,8 @@ const Member = () => {
         <div>
             <h1>Webpack 5 with React</h1>
             <blockquote>Lorem ipsum dolores</blockquote>
+
+            <Signout />
 
             <div>Width: {width}, Height: {height}</div>
 

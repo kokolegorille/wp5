@@ -1,14 +1,14 @@
 import React, { createContext, useContext, useState } from "react";
 
-export const ThemeContext = createContext();
+const ThemeContext = createContext();
 
 // Separate Flash context into value and setter
-export const FlashContext = createContext();
-export const FlashSetContext = createContext();
+const FlashContext = createContext();
+const FlashSetContext = createContext();
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-export const LanguageContext = createContext();
+const LanguageContext = createContext();
 
 import useAuth from "./useAuth";
 import Api from "../services/Api";

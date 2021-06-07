@@ -108,9 +108,10 @@ const reducer = (state, action) => {
 
 const useAuth = (api, initialState = defaultState) => {
     const [state, dispatch] = useReducer(reducer, initialState);
+    const { isAuthenticated } = state;
 
     const signin = params => {
-        if (state.isAuthenticated) { return };
+        if (isAuthenticated) { return };
         api.signin(params)
             .then(response => {
                 if (response.ok) {
@@ -127,7 +128,7 @@ const useAuth = (api, initialState = defaultState) => {
     };
 
     const signup = params => {
-        if (state.isAuthenticated) { return };
+        if (isAuthenticated) { return };
         api.signup(params)
             .then(response => {
                 if (response.ok) {
@@ -143,9 +144,42 @@ const useAuth = (api, initialState = defaultState) => {
             .catch(error => dispatch({ type: SIGNUP_ERROR, payload: error }));
     };
 
-    const actions = {
-        signin, signup
+    const signout = token => {
+        if (!isAuthenticated) { return };
+        api.signout(token)
+            .then(response => {
+                if (response.ok) {
+                    response
+                    .json()
+                    .then(_data => dispatch({ type: SIGNOUT_SUCCESS }))
+                } else {
+                    response
+                    .json()
+                    .then(data => dispatch({ type: SIGNOUT_ERROR, payload: data }))
+                }
+            })
+            .catch(error => dispatch({ type: SIGNOUT_ERROR, payload: error }));
     };
+
+    const refreshToken = token => {
+        api.refreshToken(token)
+            .then(response => {
+                if (response.ok) {
+                    response
+                    .json()
+                    .then(data => dispatch({ type: REFRESH_TOKEN_SUCCESS, payload: data }))
+                } else {
+                    response
+                    .json()
+                    .then(data => dispatch({ type: REFRESH_TOKEN_ERROR, payload: data }))
+                }
+            })
+            .catch(error => dispatch({ type: REFRESH_TOKEN_ERROR, payload: error }));
+    };
+
+    const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
+
+    const actions = { signin, signup, signout, refreshToken, clearErrors };
 
     return { state, actions };
 }

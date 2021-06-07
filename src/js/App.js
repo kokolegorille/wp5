@@ -14,8 +14,6 @@ const App = () => {
 
     const { isAuthenticated } = state;
 
-    console.log(state);
-
     return (
         <div id="main" data-theme={theme}>
             <Flash />

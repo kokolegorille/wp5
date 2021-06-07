@@ -9,11 +9,10 @@ const Landing = () => {
     const nextLabel = signMode === "Signup" ? "Sign in" : "Sign up";
     return (
         <div>
-            <h3>{signMode}</h3>
+            Go to <a onClick={() => setSignMode(nextSignMode)}>{nextLabel}</a>
             <Suspense fallback={<div>Loading...</div>}>
                 { signMode === "Signin" ? <Signin /> : <Signup /> }
             </Suspense>
-            or <a onClick={() => setSignMode(nextSignMode)}>{nextLabel}</a>
         </div>
     )
 }

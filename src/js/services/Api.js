@@ -10,6 +10,20 @@ const authHeaders = (token, method) => ({
     credentials: "same-origin",
 });
 
+// const authHeadersWithData = (token, method, data) => ({
+//     method,
+//     headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//     },
+//     credentials: "same-origin",
+//     body: JSON.stringify(data)
+// });
+
+const authHeadersWithData = (token, method, data) => 
+    Object.assign({ body: JSON.stringify(data) }, authHeaders(token, method));
+
 const guestHeaders = (data, method = "POST") => ({
     method,
     headers: {
@@ -30,13 +44,11 @@ const Api = {
     // AUTHENTIFIED
     // PATCH
     refreshToken: token => 
-        fetch(`${ROOT_URL}/authentication/refresh`, { session: { token } }, 
-        authHeaders(token, "PATCH")),
+        fetch(`${ROOT_URL}/authentication/refresh`, authHeadersWithData(token, "PATCH", { session: { token } })),
 
     // DELETE
     signout: token => 
-        fetch(`${ROOT_URL}/authentication`, 
-        authHeaders(token, "DELETE")),
+        fetch(`${ROOT_URL}/authentication`, authHeaders(token, "DELETE")),
 };
 
 export default Api;
