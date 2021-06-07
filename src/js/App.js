@@ -20,9 +20,11 @@ const App = () => {
         <div id="main" data-theme={theme}>
             <Flash />
             <ThemeSwitch />
-            <Suspense fallback={<div>Loading...</div>}>
-                { isAuthenticated ? <Member /> : <Landing /> }
-            </Suspense>
+            <div className="container">
+                <Suspense fallback={<div>Loading...</div>}>
+                    { isAuthenticated ? <Member /> : <Landing /> }
+                </Suspense>
+            </div>
         </div>
     )
 }
