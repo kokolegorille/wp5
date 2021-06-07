@@ -126,8 +126,25 @@ const useAuth = (api, initialState = defaultState) => {
             .catch(error => dispatch({ type: SIGNIN_ERROR, payload: error }));
     };
 
+    const signup = params => {
+        if (state.isAuthenticated) { return };
+        api.signup(params)
+            .then(response => {
+                if (response.ok) {
+                    response
+                    .json()
+                    .then(data => dispatch({ type: SIGNUP_SUCCESS, payload: data }))
+                } else {
+                    response
+                    .json()
+                    .then(data => dispatch({ type: SIGNUP_ERROR, payload: data }))
+                }
+            })
+            .catch(error => dispatch({ type: SIGNUP_ERROR, payload: error }));
+    };
+
     const actions = {
-        signin
+        signin, signup
     };
 
     return { state, actions };

@@ -2,8 +2,8 @@ import React, { lazy, Suspense } from "react";
 
 import { useAppAuth, useTheme } from "./hooks/useApp";
 
-const Demo = lazy(() => import("./views/Demo"));
-const Signin = lazy(() => import("./views/Signin"));
+const Member = lazy(() => import("./views/Member"));
+const Landing = lazy(() => import("./views/Landing"));
 
 import Flash from "./components/Flash";
 import ThemeSwitch from "./components/ThemeSwitch";
@@ -14,12 +14,14 @@ const App = () => {
 
     const { isAuthenticated } = state;
 
+    console.log(state);
+
     return (
         <div id="main" data-theme={theme}>
             <Flash />
             <ThemeSwitch />
             <Suspense fallback={<div>Loading...</div>}>
-                { !isAuthenticated ? <Demo /> : <Signin /> }
+                { isAuthenticated ? <Member /> : <Landing /> }
             </Suspense>
         </div>
     )
