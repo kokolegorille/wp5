@@ -9,7 +9,6 @@ const Signout = () => {
         <div>
             Welcome {user.name}&nbsp;
             <a onClick={() => actions.signout(token)}>Sign out</a>
-            <a onClick={() => actions.refreshToken(token)}>Refresh</a>
         </div>
     )
 };
