@@ -111,7 +111,7 @@ const useAuth = (api, initialState = defaultState) => {
     const { isAuthenticated } = state;
 
     const signin = params => {
-        if (isAuthenticated) { return };
+        if (isAuthenticated) { return }
         api.signin(params)
             .then(response => {
                 if (response.ok) {
@@ -124,11 +124,11 @@ const useAuth = (api, initialState = defaultState) => {
                     .then(data => dispatch({ type: SIGNIN_ERROR, payload: data.error }))
                 }
             })
-            .catch(error => dispatch({ type: SIGNIN_ERROR, payload: error }));
+            .catch(error => dispatch({ type: SIGNIN_ERROR, payload: error.message }));
     };
 
     const signup = params => {
-        if (isAuthenticated) { return };
+        if (isAuthenticated) { return }
         api.signup(params)
             .then(response => {
                 if (response.ok) {
@@ -141,11 +141,11 @@ const useAuth = (api, initialState = defaultState) => {
                     .then(data => dispatch({ type: SIGNUP_ERROR, payload: data }))
                 }
             })
-            .catch(error => dispatch({ type: SIGNUP_ERROR, payload: error }));
+            .catch(error => dispatch({ type: SIGNUP_ERROR, payload: error.message }));
     };
 
     const signout = token => {
-        if (!isAuthenticated) { return };
+        if (!isAuthenticated) { return }
         api.signout(token)
             .then(response => {
                 if (response.ok) {
@@ -158,7 +158,7 @@ const useAuth = (api, initialState = defaultState) => {
                     .then(data => dispatch({ type: SIGNOUT_ERROR, payload: data }))
                 }
             })
-            .catch(error => dispatch({ type: SIGNOUT_ERROR, payload: error }));
+            .catch(error => dispatch({ type: SIGNOUT_ERROR, payload: error.message }));
     };
 
     const refreshToken = token => {
@@ -174,7 +174,7 @@ const useAuth = (api, initialState = defaultState) => {
                     .then(data => dispatch({ type: REFRESH_TOKEN_ERROR, payload: data }))
                 }
             })
-            .catch(error => dispatch({ type: REFRESH_TOKEN_ERROR, payload: error }));
+            .catch(error => dispatch({ type: REFRESH_TOKEN_ERROR, payload: error.message }));
     };
 
     const clearErrors = () => dispatch({ type: CLEAR_ERRORS });

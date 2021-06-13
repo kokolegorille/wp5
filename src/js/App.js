@@ -1,6 +1,7 @@
 import React, { useEffect, lazy, Suspense } from "react";
 
 import { useAppAuth, useTheme } from "./hooks/useApp";
+import PhxProvider from "./hooks/usePhx";
 
 const Member = lazy(() => import("./views/Member"));
 const Landing = lazy(() => import("./views/Landing"));
@@ -9,6 +10,8 @@ import Auth from "./services/Auth";
 
 import Flash from "./components/Flash";
 import ThemeSwitch from "./components/ThemeSwitch";
+
+
 
 const App = () => {
     const { state, actions } = useAppAuth();
@@ -36,11 +39,11 @@ const App = () => {
 
     return (
         <div id="main" data-theme={theme}>
-            <Flash />
-            <ThemeSwitch />
             <div className="container">
+                <Flash />
+                <ThemeSwitch />
                 <Suspense fallback={<div>Loading...</div>}>
-                    {isAuthenticated ? <Member /> : <Landing />}
+                    {isAuthenticated ? <PhxProvider><Member /></PhxProvider> : <Landing />}
                 </Suspense>
             </div>
         </div>

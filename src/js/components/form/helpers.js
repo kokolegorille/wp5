@@ -3,7 +3,7 @@
 export const capitalizeFirst = str => str.charAt(0).toUpperCase() + str.slice(1);
 
 export const handleError = (key, error) => {
-    if (!error) { return };
+    if (!error) { return }
 
     if (error.type) {
         // Standard hook error

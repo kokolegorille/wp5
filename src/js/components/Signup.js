@@ -7,6 +7,7 @@ import { handleError } from "./form/helpers";
 
 const Signup = () => {
     const { state, actions } = useAppAuth();
+    const { errorMessage } = state;
     const { register, handleSubmit, formState: { errors }} = useForm();
 
     const onSubmit = d => actions.signup(d);
@@ -14,6 +15,10 @@ const Signup = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h3>Sign up</h3>
+            {
+                errorMessage &&
+                <p className="error">{errorMessage}</p>
+            }
             <Input 
                 label="name" 
                 register={register} 
@@ -23,7 +28,8 @@ const Signup = () => {
             <Input 
                 label="email" 
                 register={register} 
-                registerParams={{ required: true, pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ }} type="email" 
+                registerParams={{ required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ }} type="email" 
+                // registerParams={{ required: true, pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ }} type="email" 
                 error={handleError("email", errors["email"] || state.errors["email"])}
                 className="form-control" />
             <Input 

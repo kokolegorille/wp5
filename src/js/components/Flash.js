@@ -17,7 +17,7 @@ const Flash = () => {
         }
     }, [flash]);
 
-    if (!flash) { return null };
+    if (!flash) { return null }
     return (
         <div className="alert" role="alert">
             {flash}
